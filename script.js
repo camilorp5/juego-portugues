@@ -1,5 +1,4 @@
-HEAD
-document.addEventListener('DOMContentLoaded')
+document.addEventListener('DOMContentLoaded', () => {
     // --- Configuración Inicial ---
     const BOARD_SIZE = 15;
     const RACK_SIZE = 7;
@@ -510,3 +509,4 @@ document.addEventListener('DOMContentLoaded')
 
     // Iniciar el juego al cargar la página
     initGame();
+});
