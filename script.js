@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const BOARD_SIZE = 15;
-    const RACK_SIZE = 7;
+    const RACK_SIZE = 9;
         
     // Distribución de letras y puntos (Español estándar aproximado)
     const TILE_DISTRIBUTION = {
         'A': { count: 12, score: 1 }, 'E': { count: 12, score: 1 },
-        'O': { count: 9, score: 1 }, 'R': { count: 6, score: 1 },
-        'S': { count: 6, score: 1 }, 'C': { count: 5, score: 1 },
-        'T': { count: 5, score: 1 }, 'I': { count: 4, score: 1 },
-        'N': { count: 5, score: 1 }, 'L': { count: 4, score: 1 },
-        'U': { count: 4, score: 3 }, 'P': { count: 4, score: 2 },
-        'M': { count: 2, score: 2 }, 'D': { count: 2, score: 3 },
+        'O': { count: 9, score: 1 }, 'R': { count: 7, score: 1 },
+        'S': { count: 6, score: 1 }, 'I': { count: 5, score: 1 },
+        'M': { count: 5, score: 1 }, 'U': { count: 4, score: 1 },
+        'T': { count: 5, score: 1 }, 'C': { count: 4, score: 1 },
+        'N': { count: 4, score: 3 }, 'P': { count: 4, score: 2 },
+        'L': { count: 2, score: 2 }, 'D': { count: 2, score: 3 },
         'V': { count: 2, score: 3 }, 'G': { count: 2, score: 3 },
         'H': { count: 2, score: 4 }, 'Z': { count: 1, score: 4 },
         'F': { count: 1, score: 4 }, 'B': { count: 1, score: 4 },
@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
             // Diccionario BÁSICO (¡Ampliar considerablemente!)
     const DICTIONARY = new Set([
-        "SER", "SOU", "ÉS", "É", "SOMOS", "SOIS", "SÃO", "FUI", "FOI", "FOMOS", "FORAM", 
-        "ESTAR", "ESTOU", "ESTÁS", "ESTÁ", "ESTAMOS", "ESTAIS", "ESTÃO", "ESTIVE", "ESTIVESTE", "ESTEVE", "ESTIVEMOS", "ESTIVERAM",
-        "TER", "TENHO", "TENS", "TEM", "TEMOS", "TENDES", "TÊM", "TIVE", "TIVESTE", "TEVE", "TIVEMOS", "TIVERAM",
+        "SER", "SOU", "ES", "E", "SOMOS", "SOIS", "SÃO", "FUI", "FOI", "FOMOS", "FORAM", 
+        "ESTAR", "ESTOU", "ESTAS", "ESTA", "ESTAMOS", "ESTAIS", "ESTÃO", "ESTIVE", "ESTIVESTE", "ESTEVE", "ESTIVEMOS", "ESTIVERAM",
+        "TER", "TENHO", "TENS", "TEM", "TEMOS", "TENDES", "TEM", "TIVE", "TIVESTE", "TEVE", "TIVEMOS", "TIVERAM",
         "FAZER", "FAÇO", "FAZES", "FAZ", "FAZEMOS", "FAZEIS", "FAZEM", "FIZ", "FIZESTE", "FEZ", "FIZEMOS", "FIZERAM",
-        "PODER", "POSSO", "PODES", "PODE", "PODEMOS", "PODEIS", "PODEM", "PUDE", "PUDESTE", "PÔDE", "PUDEMOS", "PUDERAM",
+        "PODER", "POSSO", "PODES", "PODE", "PODEMOS", "PODEIS", "PODEM", "PUDE", "PUDESTE", "PODE", "PUDEMOS", "PUDERAM",
         "DIZER", "DIGO", "DIZES", "DIZ", "DIZEMOS", "DIZEIS", "DIZEM", "DISSE", "DISSESTE", "DISSE", "DISSEMOS", "DISSERAM",
         "IR", "VOU", "VAIS", "VAI", "VAMOS", "IDES", "VÃO", "FUI", "FOSTE", "FOI", "FOMOS", "FORAM",
         "VER", "VEJO", "VES", "VÊ", "VEMOS", "VEDE", "VEEM", "VI", "VISTE", "VIU", "VIMOS", "VIRAM",
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "QUERER", "QUERO", "QUERES", "QUER", "QUEREMOS", "QUEREIS", "QUEREM", "QUIS", "QUISESTE", "QUIS", "QUISEMOS", "QUISERAM",
         "CHEGAR", "CHEGO", "CHEGAS", "CHEGA", "CHEGAMOS", "CHEGAIS", "CHEGAM", "CHEGUEI", "CHEGASTE", "CHEGOU", "CHEGAMOS", "CHEGARAM",
         "PASSAR", "PASSO", "PASSAS", "PASSA", "PASSAMOS", "PASSAIS", "PASSAM", "PASSEI", "PASSASTE", "PASSOU", "PASSAMOS", "PASSARAM",
-        "DEVER", "DEVO", "DEVES", "DEVE", "DEVEMOS", "DEVEIS", "DEVEM", "DEVIA", "DEVÍAMOS", "DEVIAM",
+        "DEVER", "DEVO", "DEVES", "DEVE", "DEVEMOS", "DEVEIS", "DEVEM", "DEVIA", "DEVIAMOS", "DEVIAM",
         "COLOCAR", "COLOCO", "COLOCAS", "COLOCA", "COLOCAMOS", "COLOCAIS", "COLOCAM", "COLOQUEI", "COLOCASTE", "COLOCOU", "COLOCAMOS", "COLOCARAM",
         "PARECER", "PAREÇO", "PARECES", "PARECE", "PARECEMOS", "PARECEIS", "PARECEM", "PARECI", "PARECESTE", "PARECEU", "PARECEMOS", "PARECERAM",
         "FICAR", "FICO", "FICAS", "FICA", "FICAMOS", "FICAIS", "FICAM", "FIQUEI", "FICASTE", "FICOU", "FICAMOS", "FICARAM",
@@ -67,13 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         "SEGUIR", "SIGO", "SEGUES", "SEGUE", "SEGUIMOS", "SEGUIS", "SEGUEM", "SEGUEI", "SEGUESTE", "SEGUIU", "SEGUIMOS", "SEGUIRAM",
         "ENCONTRAR", "ENCONTRO", "ENCONTRAS", "ENCONTRA", "ENCONTRAMOS", "ENCONTRAIS", "ENCONTRAM", "ENCONTREI", "ENCONTRASTE", "ENCONTROU", "ENCONTRAMOS", "ENCONTRARAM",
         "CHAMAR", "CHAMO", "CHAMAS", "CHAMA", "CHAMAMOS", "CHAMAIS", "CHAMAM", "CHAMEI", "CHAMASTE", "CHAMOU", "CHAMAMOS", "CHAMARAM",
-        "VIR", "VENHO", "VENS", "VEM", "VIMOS", "VINDES", "VÊM", "VIM", "VINHAS", "VINHA", "VÍNHAMOS", "VINHAM",
+        "VIR", "VENHO", "VENS", "VEM", "VIMOS", "VINDES", "VÊM", "VIM", "VINHAS", "VINHA", "VINHAMOS", "VINHAM",
         "PENSAR", "PENSO", "PENSAS", "PENSA", "PENSAMOS", "PENSAIS", "PENSAM", "PENSEI", "PENSASTE", "PENSOU", "PENSAMOS", "PENSARAM",
-        "SAIR", "SAIO", "SAIS", "SAI", "SAÍMOS", "SAÍS", "SAEM", "SAÍ", "SAÍSTE", "SAIU", "SAÍMOS", "SAÍRAM",
+        "SAIR", "SAIO", "SAIS", "SAI", "SAIMOS", "SAIS", "SAEM", "SAI", "SAISTE", "SAIU", "SAIMOS", "SAIRAM",
         "VOLTAR", "VOLTO", "VOLTAS", "VOLTA", "VOLTAMOS", "VOLTAIS", "VOLTAM", "VOLTEI", "VOLTASTE", "VOLTOU", "VOLTAMOS", "VOLTARAM",
         "PEGAR", "PEGO", "PEGAS", "PEGA", "PEGAMOS", "PEGAIS", "PEGAM", "PEGUEI", "PEGASTE", "PEGOU", "PEGAMOS", "PEGARAM",
         "CONHECER", "CONHEÇO", "CONHECES", "CONHECE", "CONHECEMOS", "CONHECEIS", "CONHECEM", "CONHECI", "CONHECESTE", "CONHECEU", "CONHECEMOS", "CONHECERAM",
         "VIVER", "VIVO", "VIVES", "VIVE", "VIVEMOS", "VIVEIS", "VIVEM", "VIVI", "VIVESTE", "VIVEU", "VIVEMOS", "VIVERAM",
+        
         "SENTIR", "TRATAR", "OLHAR", "CONTAR", "COMEÇAR", "ESPERAR",
         "PROCURAR", "ENTRAR", "TRABALHAR", "ESCREVER", "PERDER", "PRODUZIR",
         "OCORRER", "RECEBER", "LEMBRAR", "TERMINAR", "PERMITIR", "APARECER",
@@ -84,7 +85,16 @@ document.addEventListener('DOMContentLoaded', () => {
         "CONSEGUIR", "EXPLICAR", "PERGUNTAR", "TOCAR", "RECONHECER", "ESTUDAR",
         "ALCANÇAR", "NASCER", "DIRIGIR", "CORRER", "UTILIZAR", "PAGAR", "AJUDAR",
         "GOSTAR", "JOGAR", "OUVIR", "CUMPRIR", "OFERECER", "DESCOBRIR",
-        "LEVANTAR", "TENTAR"
+        "LEVANTAR", "TENTAR", 'BALAR', 'VOAR', 'DANÇAR', 'PULAR', 'LIGAR', 'VIAJAR',
+        'DESEJAR', 'COMPRAR', 'MANDAR', 'JULGAR', 'PARTICIPAR', 'CONVIDAR', 'CAMINHAR',
+        'NADAR', 'BUSCAR', 'INFORMAR', 'MORAR', 'USAR', 'DORMIR', 'ACORDAR', 'PARAR',
+        'LAVAR', 'LEVAR', 'AVISAR', 'ESPERAR', 'POSSUIR', 
+
+        'AMO', 'AMA', 'AMAS', 'AMAMOS', 'AMAM', 'AMEI', 'AMASTE', 'AMOU', 'AMÁMOS', 'AMASTES', 'AMARAM', 'AMAVA',
+        'AMADO', 'AMAREI', 'AMARAS', 'AMAREMOS', 'AMARÃO',
+        'ESTUDO','ESTUDA','ESTUDAMOS','ESTUDAM','ESTUDEI','ESTUDASTE','ESTUDOU','ESTUDÁMOS','ESTUDARAM','ESTUDAVA',
+        'ESTUDARA','ESTUDÁRAMOS','ESTUDARAM',
+        'BRINCO','BRINCA','BRINCAMOS','BRINCAM','BRINQUEI','BRINCOU','BRINCAMOS','BRINCARAM',
         ]);
         
 
