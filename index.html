@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Palabras (Scrabble Básico)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Juego de Palabras</h1>
+
+    <div class="game-container">
+        <div id="game-board">
+            </div>
+
+        <div class="controls-area">
+            <div id="player-rack">
+                <h2>Tu Atril</h2>
+                <div class="tiles">
+                    </div>
+            </div>
+
+            <div id="score-area">
+                <h2>Puntuación</h2>
+                <p>Puntuación Turno: <span id="turn-score">0</span></p>
+                <p>Puntuación Total: <span id="total-score">0</span></p>
+                <p>Fichas Restantes: <span id="tiles-left">--</span></p>
+            </div>
+
+            <div id="actions">
+                <button id="play-word-btn">Jugar Palabra</button>
+                <button id="shuffle-btn">Mezclar Atril</button>
+                <button id="reset-btn">Nuevo Juego</button>
+                <button id="recall-btn">Devolver Fichas</button> </div>
+             <div id="message-area">
+                <p id="message">Coloca tus fichas en el tablero.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
