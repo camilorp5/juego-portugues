@@ -5,13 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
     // Distribución de letras y puntos (Español estándar aproximado)
     const TILE_DISTRIBUTION = {
-        'R': { count: 12, score: 1 }, 'A': { count: 12, score: 1 },
-        'E': { count: 9, score: 1 }, 'S': { count: 6, score: 1 },
-        'O': { count: 6, score: 1 }, 'C': { count: 5, score: 1 },
+        'A': { count: 12, score: 1 }, 'E': { count: 12, score: 1 },
+        'O': { count: 9, score: 1 }, 'R': { count: 6, score: 1 },
+        'S': { count: 6, score: 1 }, 'C': { count: 5, score: 1 },
         'T': { count: 5, score: 1 }, 'I': { count: 4, score: 1 },
         'N': { count: 5, score: 1 }, 'L': { count: 4, score: 1 },
-        'D': { count: 4, score: 3 }, 'P': { count: 5, score: 2 },
-        'M': { count: 2, score: 2 }, 'U': { count: 2, score: 3 },
+        'U': { count: 4, score: 3 }, 'P': { count: 4, score: 2 },
+        'M': { count: 2, score: 2 }, 'D': { count: 2, score: 3 },
         'V': { count: 2, score: 3 }, 'G': { count: 2, score: 3 },
         'H': { count: 2, score: 4 }, 'Z': { count: 1, score: 4 },
         'F': { count: 1, score: 4 }, 'B': { count: 1, score: 4 },
